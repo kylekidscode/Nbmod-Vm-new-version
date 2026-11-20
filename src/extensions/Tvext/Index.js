@@ -125,5 +125,5 @@
 
     Scratch.extensions.register(new Extension());
 
-    module.exports = THE vedal extension;
+    module.exports = Extension;
 })(Scratch);

@@ -8,7 +8,7 @@
  * to customize the security policies as you see fit, for example:
  * ```js
  * vm.securityManager.getSandboxMode = (url) => {
- *   if (url.startsWith("https://example.com/")) {
+ *   if (url.startsWith("https://example.com")) {
  *     return "unsandboxed";
  *   }
  *   return "iframe";
@@ -17,13 +17,13 @@
  *   return confirm("Automatically load extension: " + url);
  * };
  * vm.securityManager.canFetch = (url) => {
- *   return url.startsWith('https://turbowarp.org/');
+ *   return url.startsWith('https://turbowarp.org');
  * };
  * vm.securityManager.canOpenWindow = (url) => {
- *   return url.startsWith('https://turbowarp.org/');
+ *   return url.startsWith('https://turbowarp.org');
  * };
  * vm.securityManager.canRedirect = (url) => {
- *   return url.startsWith('https://turbowarp.org/');
+ *   return url.startsWith('https://turbowarp.org');
  * };
  * ```
  */
@@ -34,8 +34,7 @@ class SecurityManager {
      * @returns {'worker'|'iframe'|'unsandboxed'|Promise<'worker'|'iframe'|'unsandboxed'>} -
      */
     getSandboxMode (extensionURL) {
-        // Default to worker for Scratch compatibility
-        return Promise.resolve('worker');
+        return Promise.resolve('unsandboxed');
     }
 
     /**
@@ -172,7 +171,7 @@ class SecurityManager {
     /**
      * Determine whether an extension is allowed to download a URL with a given name.
      * @param {string} resourceURL The URL to download
-     * @param {string} name The name of the fileAdd commentMore actions
+     * @param {string} name The name of the file
      * @returns {Promise<boolean>|boolean} -
      */
     canDownload (resourceURL, name) {
